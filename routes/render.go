@@ -150,11 +150,11 @@ func render(w http.ResponseWriter, r *http.Request, name string, data ...any) {
 		// Shallow copy because we want to modify a string.
 		config := oauthConfig
 
-		config.RedirectURL = "https://code.golf/callback"
+		config.RedirectURL = "https://"+os.Getenv("SITE_HOST")+"/callback"
 
-		if dev {
-			config.RedirectURL += "/dev"
-		}
+		// if dev {
+		// 	config.RedirectURL += "/dev"
+		// }
 
 		config.RedirectURL += "?redirect_uri=" + url.QueryEscape(r.RequestURI)
 

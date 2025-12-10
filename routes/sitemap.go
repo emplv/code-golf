@@ -20,10 +20,10 @@ func sitemapGET(w http.ResponseWriter, r *http.Request) {
 		URLs    []URL    `xml:"url"`
 	}{
 		URLs: []URL{
-			{"https://code.golf"},
-			{"https://code.golf/about"},
-			{"https://code.golf/ideas"},
-			{"https://code.golf/stats"},
+			{"https://"+os.Getenv("SITE_HOST")},
+			{"https://"+os.Getenv("SITE_HOST")+"/about"},
+			{"https://"+os.Getenv("SITE_HOST")+"/ideas"},
+			{"https://"+os.Getenv("SITE_HOST")+"/stats"},
 		},
 	}
 
@@ -40,7 +40,7 @@ func sitemapGET(w http.ResponseWriter, r *http.Request) {
 
 	for _, hole := range config.HoleList {
 		sitemap.URLs = append(
-			sitemap.URLs, URL{"https://code.golf/" + url.PathEscape(hole.ID)})
+			sitemap.URLs, URL{"https://"+os.Getenv("SITE_HOST")+"/" + url.PathEscape(hole.ID)})
 	}
 
 	w.Header().Set("Content-Type", "text/xml; charset=utf-8")

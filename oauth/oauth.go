@@ -43,45 +43,12 @@ var Providers = map[string]*Config{
 		Name:   "GitHub",
 		Config: oauth2.Config{Endpoint: endpoints.GitHub},
 	},
-
-	// https://gitlab.com/-/profile/applications
-	// https://docs.gitlab.com/integration/openid_connect_provider/
-	"gitlab": {
-		Name:         "GitLab",
-		UserEndpoint: "https://gitlab.com/oauth/userinfo",
-		Config: oauth2.Config{
-			Endpoint: endpoints.GitLab,
-			Scopes:   []string{"openid"},
-		},
-	},
-
-	// https://gravatar.com/developers/applications
-	// https://docs.gravatar.com/api/oauth/
-	"gravatar": {
-		Name:         "Gravatar",
-		UserEndpoint: "https://api.gravatar.com/v3/me/profile",
-		Config: oauth2.Config{
-			Endpoint: oauth2.Endpoint{
-				AuthURL:  "https://public-api.wordpress.com/oauth2/authorize",
-				TokenURL: "https://public-api.wordpress.com/oauth2/token",
-			},
-			Scopes: []string{"auth", "gravatar-profile:read"},
-		},
-	},
-
-	// https://stackapps.com/apps/oauth
-	// https://api.stackexchange.com/docs/me
-	"stack-overflow": {
-		Name:         "Stack Overflow",
-		Config:       oauth2.Config{Endpoint: endpoints.StackOverflow},
-		UserEndpoint: "https://api.stackexchange.com/me?site=stackoverflow",
-	},
 }
 
 func init() {
 	host := "code.golf"
 	if _, dev := os.LookupEnv("DEV"); dev {
-		host = "localhost"
+		host = os.Getenv("SITE_HOST")
 	}
 
 	for id, config := range Providers {

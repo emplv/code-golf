@@ -21,7 +21,7 @@ var oauthConfig = oauth2.Config{
 
 // GET /callback/dev, exists because GitHub doesn't support multiple URLs.
 func callbackDevGET(w http.ResponseWriter, r *http.Request) {
-	http.Redirect(w, r, "https://localhost/callback?"+r.URL.RawQuery, http.StatusSeeOther)
+	http.Redirect(w, r, "https://"+os.Getenv("SITE_HOST")+"/callback?"+r.URL.RawQuery, http.StatusSeeOther)
 }
 
 // GET /callback
