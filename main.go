@@ -156,20 +156,20 @@ func main() {
 	log.Println("Listening…")
 
 	// Dev.
-	if _, dev := os.LookupEnv("DEV"); dev {
-		// Redirect HTTP to HTTPS.
-		go func() {
-			panic(http.ListenAndServe(":80",
-				http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-					http.Redirect(w, r, "https://"+os.Getenv("SITE_HOST")+r.RequestURI,
-						http.StatusMovedPermanently)
-				})))
-		}()
+	// if _, dev := os.LookupEnv("DEV"); dev {
+	// 	// Redirect HTTP to HTTPS.
+	// 	go func() {
+	// 		panic(http.ListenAndServe(":80",
+	// 			http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	// 				http.Redirect(w, r, "https://"+os.Getenv("SITE_HOST")+r.RequestURI,
+	// 					http.StatusMovedPermanently)
+	// 			})))
+	// 	}()
 
-		// Serve HTTPS.
-		panic(http.ListenAndServeTLS(
-			":443", os.Getenv("SITE_HOST")+".pem", os.Getenv("SITE_HOST")+"-key.pem", routes.Router(db)))
-	}
+	// 	// Serve HTTPS.
+	// 	// panic(http.ListenAndServeTLS(
+	// 	// 	":443", os.Getenv("SITE_HOST")+".pem", os.Getenv("SITE_HOST")+"-key.pem", routes.Router(db)))
+	// }
 
 	// Live only listens on HTTP, TLS is handled by Caddy.
 	panic(http.ListenAndServe(":80", routes.Router(db)))
