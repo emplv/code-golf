@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"net/http"
 	"net/url"
+	"os"
 
 	"github.com/code-golf/code-golf/config"
 	"github.com/code-golf/code-golf/session"
