@@ -169,7 +169,6 @@ func sudokuBoard(fillIn bool) Answer {
 }
 
 var _ = answerFunc("sudoku", func() []Answer { return sudoku(false) })
-var _ = answerFunc("sudoku-fill-in", func() []Answer { return sudoku(true) })
 
 func sudoku(fillIn bool) []Answer {
 	answers := make([]Answer, 3)
