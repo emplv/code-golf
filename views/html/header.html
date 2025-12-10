@@ -30,8 +30,8 @@
 <meta property=og:title        content="{{ .Title }}">
 <meta property=og:url          content="https://code.golf{{ with .Path }}{{ . }}{{ end }}">
 
-<script id=langs type=application/json>{{ .Langs }}</script>
-<script id=holes type=application/json>{{ .Holes }}</script>
+<script id=langs type=application/json nonce="{{ $.Nonce }}">{{ .Langs }}</script>
+<script id=holes type=application/json nonce="{{ $.Nonce }}">{{ .Holes }}</script>
 
 {{ range .CSS -}}
     <link rel=stylesheet href="{{ .Path }}" {{- with .Media }} media="{{ . }}" {{- end }}>
@@ -56,7 +56,7 @@
 {{ end }}
 
 <!-- Convert server-side theme into a client-side media query -->
-<script id=dark-mode-media-query type=application/json>
+<script id=dark-mode-media-query type=application/json nonce="{{ $.Nonce }}">
 {{- if eq .Theme "dark" -}}
     "all"
 {{- else if eq .Theme "light" -}}

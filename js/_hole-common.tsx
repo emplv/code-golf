@@ -63,7 +63,12 @@ export function init(_tabLayout: boolean, setSolution: any, setCodeForLangAndSol
     (onhashchange = async () => {
         // Kick 'em to Python if we don't know the chosen/saved language.
         const langID = location.hash.slice(1) || localStorage.getItem('lang');
-        currentLang = langs[langID ?? ''] ?? langs['python'];
+        currentLang = langs[langID ?? ''] ?? langs['javascript'] ?? Object.values(langs)[0];
+
+        if (!currentLang) {
+            console.error('No languages available');
+            return;
+        }
 
         lang = currentLang.id;
 

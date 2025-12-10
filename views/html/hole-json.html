@@ -1,18 +1,18 @@
-<script id=keymap type=application/json>
+<script id=keymap type=application/json nonce="{{ $.Nonce }}">
     {{ setting .Golfer "hole" "editor-keymap" }}
 </script>
 
-<script id=case-fold type=application/json>{{ .Data.Hole.CaseFold }}</script>
-<script id=languages type=application/json>{{ .Data.Langs         }}</script>
-<script id=solutions type=application/json>{{ .Data.Solutions     }}</script>
+<script id=case-fold type=application/json nonce="{{ $.Nonce }}">{{ .Data.Hole.CaseFold }}</script>
+<script id=languages type=application/json nonce="{{ $.Nonce }}">{{ .Data.Langs         }}</script>
+<script id=solutions type=application/json nonce="{{ $.Nonce }}">{{ .Data.Solutions     }}</script>
 
-<script id=has-notes type=application/json>
+<script id=has-notes type=application/json nonce="{{ $.Nonce }}">
     {{ with .Golfer }}{{ .HasNotes }}{{ else }}false{{ end }}
 </script>
 
-<script id=sponsor type=application/json>
+<script id=sponsor type=application/json nonce="{{ $.Nonce }}">
     {{ with .Golfer }}{{ .SponsorOrAdmin }}{{ else }}false{{ end }}
 </script>
 
-<script id=renamed-holes type=application/json>{{ .Data.HoleRedirects }}</script>
-<script id=renamed-langs type=application/json>{{ .Data.LangRedirects }}</script>
+<script id=renamed-holes type=application/json nonce="{{ $.Nonce }}">{{ .Data.HoleRedirects }}</script>
+<script id=renamed-langs type=application/json nonce="{{ $.Nonce }}">{{ .Data.LangRedirects }}</script>
